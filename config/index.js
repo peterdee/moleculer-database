@@ -2,7 +2,8 @@ const { env: environment = {} } = process;
 
 module.exports = {
   AUTH_ENABLED: environment.APP_AUTH_ENABLED === 'true',
-  AUTH_SECRET: environment.APP_AUTH_SECRET,
+  AUTH_EXPIRATION: Number(environment.APP_AUTH_EXPIRATION) || 300,
+  AUTH_SECRET: environment.APP_AUTH_SECRET || 'super-secret',
   ERROR_MESSAGES: {
     internalServerError: 'INTERNAL_SERVER_ERROR',
     invalidAuth: 'INVALID_AUTH',
@@ -13,6 +14,8 @@ module.exports = {
   ERROR_TYPES: {
     accessDenied: 'ACCESS_DENIED',
   },
+  PORT: Number(environment.PORT) || 5522,
+  PROVIDER: environment.APP_PROVIDER || 'moleculer-database',
   RESPONSE_CODES: {
     200: 200,
     400: 400,
@@ -25,5 +28,4 @@ module.exports = {
     ok: 'OK',
     pingOk: 'PING_OK',
   },
-  PORT: Number(environment.PORT) || 5522,
 };
