@@ -1,31 +1,46 @@
 {
   "name": "moleculer-database",
   "version": "1.0.0",
-  "description": "My Moleculer-based microservices project",
+  "private": true,
+  "author": {
+    "name": "Peter Dyumin",
+    "url": "https://github.com/peterdee"
+  },
+  "description": "A Moleculer-based microservice that stores data in the database",
+  "homepage": "https://github.com/peterdee/moleculer-database",
   "scripts": {
-    "dev": "moleculer-runner --repl --hot services/**/*.service.js",
-    "start": "moleculer-runner",
+    "dev": "NODE_ENV=development moleculer-runner --env --repl --hot services/**/*.service.js",
+    "start": "NODE_ENV=production moleculer-runner --env",
     "cli": "moleculer connect",
     "dc:up": "docker-compose up --build -d",
     "dc:logs": "docker-compose logs -f",
     "dc:down": "docker-compose down"
   },
-  "keywords": [
-    "microservices",
-    "moleculer"
-  ],
-  "author": "",
-  "devDependencies": {
-    "moleculer-repl": "^0.6.2"
+  "engines": {
+    "node": "12.16.1",
+    "npm": "6.14.4"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterdee/moleculer-database"
+  },
+  "keywords": [
+    "Database",
+    "Microservice",
+    "Moleculer",
+    "Node"
+  ],
   "dependencies": {
+    "axios": "^0.19.2",
     "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "moleculer": "^0.14.0",
-    "moleculer-web": "^0.9.0"
+    "moleculer-web": "^0.9.0",
+    "nats": "^1.4.8"
   },
-  "engines": {
-    "node": ">= 10.x.x"
+  "devDependencies": {
+    "moleculer-repl": "^0.6.2"
   }
 }
