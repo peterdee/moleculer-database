@@ -1,17 +1,30 @@
 'use strict';
 
+const Adapter = require('moleculer-db-adapter-mongoose');
 const axios = require('axios');
+const DBService = require('moleculer-db');
+const mongoose = require('mongoose');
 
 const clientError = require('../utilities/client-error');
 const config = require('../config');
 const formatResponse = require('../utilities/format-response');
 const serverError = require('../utilities/server-error');
+const weather = require('../models/weather.model');
 
- /**
-  * Database service
-  */
+/**
+ * Weather service, that handles the database data
+ */
 module.exports = {
-  name: 'database',
+  name: 'weather',
+  mixins: [DBService],
+  adapter: new Adapter(
+    `mongodb://${DB.username}:${DB.password}@${DB.host}:${DB.port}/${DB.name}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+  ),
+  model: mongoose.model('Weather', weather),
 	actions: {
 		cities: {
 			rest: {
