@@ -28,6 +28,7 @@
     "Database",
     "Microservice",
     "Moleculer",
+    "Mongoose",
     "Node"
   ],
   "dependencies": {
@@ -37,7 +38,10 @@
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "moleculer": "^0.14.0",
+    "moleculer-db": "^0.8.7",
+    "moleculer-db-adapter-mongoose": "^0.8.4",
     "moleculer-web": "^0.9.0",
+    "mongoose": "^5.9.10",
     "nats": "^1.4.8"
   },
   "devDependencies": {
