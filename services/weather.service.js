@@ -8,8 +8,11 @@ const mongoose = require('mongoose');
 const clientError = require('../utilities/client-error');
 const config = require('../config');
 const formatResponse = require('../utilities/format-response');
+const generateToken = require('../utilities/generate-token');
 const serverError = require('../utilities/server-error');
 const weather = require('../models/weather.model');
+
+const { DATABASE: DB } = config;
 
 /**
  * Weather service, that handles the database data
@@ -45,9 +48,13 @@ module.exports = {
         }
 
         try {
-          const { data = [] } = await axios({
+          const token = await generateToken();
+          const { data } = await axios({
+            headers: {
+              'X-Auth': token,
+            },
             method: 'GET',
-            url: `https://www.metaweather.com/api/location/search/?query=${search}`,
+            url: `${config.METAWEATHER_URL}/api/weather/cities?search=${search}`,
           });
           return formatResponse(data);
         } catch (error) {
@@ -75,17 +82,34 @@ module.exports = {
             config.RESPONSE_CODES[400],
           );
         }
+        if (Number.isNaN(Number(id))) {
+          throw clientError(
+            config.ERROR_MESSAGES.invalidCityId,
+            config.RESPONSE_CODES[400],
+          );
+        }
 
         try {
+          const token = await generateToken();
           const { data } = await axios({
+            headers: {
+              'X-Auth': token,
+            },
             method: 'GET',
-            url: `https://www.metaweather.com/api/location/${id}`,
+            url: `${config.METAWEATHER_URL}/api/weather/city?id=${id}`,
           });
-          data.svgLink = 'https://www.metaweather.com/static/img/weather/';
           return formatResponse(data);
         } catch (error) {
-          const { response: { data: { detail = '' } = {} } = {} } = error;
-          if (detail && detail === 'Not found.') {
+          console.log(error);
+          const {
+            response: {
+              data: {
+                code = null,
+                message = '',
+              } = {},
+            } = {},
+          } = error;
+          if (code && code === 400 && message && message === 'INVALID_CITY_ID') {
             throw clientError(
               config.ERROR_MESSAGES.invalidCityId,
               config.RESPONSE_CODES[400],
