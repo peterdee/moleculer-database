@@ -138,7 +138,6 @@ module.exports = {
 
           return formatResponse(city);
         } catch (error) {
-          console.log('errrr', error)
           const {
             response: {
               data: {
