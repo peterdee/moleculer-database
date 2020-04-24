@@ -18,25 +18,25 @@ services:
     networks:
       - internal
 
-  ping:
+  data:
     build:
       context: .
     image: moleculer-database
     env_file: docker-compose.env
     environment:
-      SERVICES: ping
+      SERVICES: data
     depends_on:
       - nats
     networks:
       - internal
 
-  weather:
+  ping:
     build:
       context: .
     image: moleculer-database
     env_file: docker-compose.env        
     environment:
-      SERVICES: weather
+      SERVICES: ping
     depends_on:
       - nats
     networks:

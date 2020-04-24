@@ -26,6 +26,6 @@ const response = await axios({
     'X-AUTH': token,
   }
   method: 'GET',
-  url: '',
+  url: 'http://localhost:5522/api/data/location?id=2487956',
 });
 ```

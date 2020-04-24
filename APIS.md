@@ -1,11 +1,11 @@
 ### APIS
 
-#### `api/ping` - `[GET]`
+#### `/api/ping` - `[GET]`
 
 Ping the microservice.
 
 ```json
-// http://localhost:5544/api/ping
+// http://localhost:5522/api/ping
 
 {
   "datetime": 1587299873790,
