@@ -14,7 +14,7 @@ module.exports = {
   ERROR_MESSAGES: {
     internalServerError: 'INTERNAL_SERVER_ERROR',
     invalidAuth: 'INVALID_AUTH',
-    invalidCityId: 'INVALID_CITY_ID',
+    invalidLocationId: 'INVALID_LOCATION_ID',
     missingAuth: 'MISSING_AUTH',
     missingData: 'MISSING_DATA',
   },
