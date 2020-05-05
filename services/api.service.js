@@ -2,6 +2,7 @@
 
 const APIGateway = require('moleculer-web');
 const compression = require('compression');
+const cors = require('cors');
 const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
 
@@ -18,6 +19,7 @@ module.exports = {
 
 		// global middlewares
 		use: [
+      cors(),
       compression(),
       helmet(),
     ],
