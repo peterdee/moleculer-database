@@ -35,6 +35,7 @@ module.exports = {
     500: 500,
   },
   RESPONSE_MESSAGES: {
+    notACity: 'SELECTED_LOCATION_IS_NOT_A_CITY',
     ok: 'OK',
     pingOk: 'PING_OK',
   },

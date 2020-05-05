@@ -96,7 +96,7 @@ module.exports = {
           if (!city || city.updated < Date.now() - 4 * 60 * 1000) {
             // get the fresh data from MetaWeather  
             const token = await generateToken();
-            const { data: { data = {} } = {} } = await axios({
+            const { data: response = {} } = await axios({
               headers: {
                 'X-Auth': token,
               },
@@ -104,8 +104,14 @@ module.exports = {
               url: `${config.METAWEATHER_URL}/api/data/location?id=${id}`,
             });
 
+            // handle the 'not a city' response
+            if (response.info && response.info === config.RESPONSE_MESSAGES.notACity) {
+              return formatResponse(null, config.RESPONSE_MESSAGES.notACity);
+            }
+
             // if data is related to the city, update it
-            if (data.location_type === 'City') {
+            const { data = {} } = response;
+            if (data.location_type && data.location_type === 'City') {
               const now = Date.now();
               const forecast = {
                 cityId: data.woeid,
