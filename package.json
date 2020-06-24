@@ -9,16 +9,16 @@
   "description": "A Moleculer-based microservice that stores data in the database",
   "homepage": "https://github.com/peterdee/moleculer-database",
   "scripts": {
-    "dev": "NODE_ENV=development moleculer-runner --env --repl --hot services/**/*.service.js",
-    "start": "NODE_ENV=production moleculer-runner --env",
+    "dev": "NODE_ENV=development USE_NATS=false moleculer-runner --env --repl --hot services/**/*.service.js",
+    "start": "NODE_ENV=production USE_NATS=false moleculer-runner --env",
     "cli": "moleculer connect",
-    "dc:up": "docker-compose up --build -d",
+    "dc:up": "USE_NATS=true docker-compose up --build -d",
     "dc:logs": "docker-compose logs -f",
     "dc:down": "docker-compose down"
   },
   "engines": {
-    "node": "12.16.1",
-    "npm": "6.14.4"
+    "node": "14.4.0",
+    "npm": "6.14.5"
   },
   "repository": {
     "type": "git",
