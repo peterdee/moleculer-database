@@ -16,15 +16,20 @@ module.exports = {
 	},
   
   logLevel: 'info',
-	transporter: {
-    type: 'NATS',
-    options: {
-      url: process.env.NODE_ENV === 'development'
-        ? 'nats://0.0.0.0:4222'
-        : 'nats://nats:4222',
-      maxReconnectAttempts: 10,
-    },
-  },
+
+  // Use NATS only with containers
+  transporter: process.env.USE_NATS === 'true'
+    ? ({
+      type: 'NATS',
+      options: {
+        url: process.env.NODE_ENV === 'development'
+          ? 'nats://0.0.0.0:4222'
+          : 'nats://nats:4222',
+        maxReconnectAttempts: 10,
+      },
+    })
+    : null,
+
 	cacher: null,
 	serializer: 'JSON',
 	requestTimeout: 30 * 1000,

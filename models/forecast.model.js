@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 
-module.exports = Schema({
+module.exports = new Schema({
   cityId: Number,
   cityName: String,
   latitude: String,

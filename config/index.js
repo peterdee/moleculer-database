@@ -21,9 +21,7 @@ module.exports = {
   ERROR_TYPES: {
     accessDenied: 'ACCESS_DENIED',
   },
-  METAWEATHER_URL: environment.NODE_ENV === 'production'
-    ? ''
-    : 'http://localhost:5544',
+  METAWEATHER_URL: environment.METAWEATHER_URL || 'http://localhost:5544',
   PORT: Number(environment.PORT) || 5522,
   PROVIDER: environment.APP_PROVIDER || 'moleculer-database',
   RESPONSE_CODES: {

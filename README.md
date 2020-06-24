@@ -6,50 +6,26 @@ A Moleculer-based microservice that stores data in the database.
 
 Generated with the [Moleculer CLI](https://moleculer.services/docs/0.14/moleculer-cli.html).
 
-Stack: [Moleculer](https://moleculer.services/).
+Stack: [Node](https://nodejs.org/), [Moleculer](https://moleculer.services/).
 
 More information: https://www.youtube.com/watch?v=t4YR6MWrugw
 
+DEV: http://localhost:5522
+
+STAGE: https://moleculer-database.herokuapp.com
+
 ### Deploy
-
-Local [NATS](https://nats.io/) server is required:
-
-```shell script
-brew install nats-server
-brew services start nats-server
-```
-
-NATS is used as a transport for the service communications.
 
 ```shell script
 git clone https://github.com/peterdee/moleculer-database.git
 cd ./moleculer-database
-nvm use 12.16.1
+nvm use 14.4.0
 npm i
 ```
 
 ### Environment variables
 
-Create the `.env` file in the project root directory:
-
-```shell script
-# Application
-APP_AUTH_ENABLED="true"
-APP_AUTH_SECRET=""
-APP_AUTH_EXPIRATION="300"
-APP_PROVIDER="moleculer-database"
-PORT="5522"
-
-# Database connection
-DB_HOST=""
-DB_NAME=""
-DB_PASSWORD=""
-DB_PORT=""
-DB_USERNAME=""
-
-# Moleculer
-SERVICEDIR="services"
-```
+The `.env` file is required. See the [.env.example](.env.example) for more details.
 
 ### Launch
 
@@ -78,6 +54,10 @@ Stop containers:
 ```shell script
 npm run dc:down
 ```
+
+### Heroku
+
+The `staging` branch is deployed to Heroku automatically.
 
 ### Authentication
 
